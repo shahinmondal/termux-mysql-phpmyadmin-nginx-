@@ -12,6 +12,8 @@ sudo apt install mysql-server
 
 sudo service mysql restart
 
+usermod -d /var/lib/mysql mysql
+
 mysqldump --all-databases --routines -u root -p > ~/fulldump.sql
 
 sudo apt install pv
