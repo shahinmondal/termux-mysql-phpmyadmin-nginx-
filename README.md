@@ -16,6 +16,11 @@ usermod -d /var/lib/mysql mysql
 
 mysqldump --all-databases --routines -u root -p > ~/fulldump.sql
 
+mysql
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'newpass';
+
+
 sudo apt install pv
 pv ~/fulldump.sql | mysql
 
