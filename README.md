@@ -11,3 +11,14 @@ sudo apt install mysql-server
 
 
 sudo service mysql restart
+
+mysqldump --all-databases --routines -u root -p > ~/fulldump.sql
+
+sudo apt install pv
+pv ~/fulldump.sql | mysql
+
+
+sudo apt install mysqltuner
+
+mysqltuner
+
