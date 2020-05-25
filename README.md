@@ -36,10 +36,34 @@ mysql -u root -p
 
 exit
 
+
 sudo apt-get install nginx php7.2 php7.2-common php7.2-mysql php7.2-mbstring php7.2-fpm php7.2-cgi php7.2-common php-pear php-gettext 
+
+sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
+
 
 
 sudo nano /etc/nginx/sites-available/phpmyadmin.conf
+
+
+location /phpmyadmin {
+           root /usr/share/;
+           index index.php index.html index.htm;
+           location ~ ^/phpmyadmin/(.+\.php)$ {
+                   try_files $uri =404;
+                   root /usr/share/;
+                   fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+                   fastcgi_index index.php;
+                   fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                   include /etc/nginx/fastcgi_params;
+           }
+           location ~* ^/phpmyadmin/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))$ {
+                   root /usr/share/;
+           }
+    }
+    
+    
+
 
 server {
         listen 80 default_server;
