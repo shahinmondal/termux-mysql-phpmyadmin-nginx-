@@ -34,6 +34,9 @@ SELECT user,authentication_string,plugin,host FROM mysql.user;
 
 mysql -u root -p
 
+exit
+
+
 
 
 
