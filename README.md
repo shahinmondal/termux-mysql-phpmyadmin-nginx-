@@ -16,9 +16,36 @@ usermod -d /var/lib/mysql mysql
 
 mysqldump --all-databases --routines -u root -p > ~/fulldump.sql
 
-mysql
+sudo apt update
 
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'newpass';
+sudo apt install phpmyadmin php-mbstring php-gettext
+
+sudo phpenmod mbstring
+
+sudo mysql
+
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+
+FLUSH PRIVILEGES;
+
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+
+mysql -u root -p
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 sudo apt install pv
