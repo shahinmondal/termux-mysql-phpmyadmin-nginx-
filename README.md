@@ -36,7 +36,35 @@ mysql -u root -p
 
 exit
 
+sudo apt-get install nginx php7.2 php7.2-common php7.2-mysql php7.2-mbstring php7.2-fpm php7.2-cgi php7.2-common php-pear php-gettext 
 
+
+sudo nano /etc/nginx/sites-available/phpmyadmin.conf
+
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.php index.html index.htm index.nginx-debian.html;
+
+        server_name 192.168.0.111;
+
+        location ~ \.php$ {
+           include snippets/fastcgi-php.conf;
+           fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+           fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+           include fastcgi_params;
+       }
+}
+
+sudo nginx -t
+
+sudo rm -rf /etc/nginx/sites-enabled/default
+ sudo ln -s /etc/nginx/sites-available/phpmyadmin.conf /etc/nginx/sites-enabled/
+ 
+ 
 
 
 
