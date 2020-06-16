@@ -45,7 +45,9 @@ sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
 sudo nano /etc/nginx/sites-available/phpmyadmin.conf
 
 sudo nginx -t
+
 service nginx start
+
 sudo rm -rf /etc/nginx/sites-enabled/default
 
 sudo ln -s /etc/nginx/sites-available/phpmyadmin.conf /etc/nginx/sites-enabled/
